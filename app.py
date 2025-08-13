@@ -38,7 +38,7 @@ if audio:
         "--ipa",
         "-v", "en-gb",
         "-w", output_wav,
-        ipa
+        text
     ])
 
     # Step 5: Play IPA-generated audio
