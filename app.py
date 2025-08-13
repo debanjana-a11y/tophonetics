@@ -2,6 +2,7 @@ import streamlit as st
 from phonemizer import phonemize
 from streamlit_mic_recorder import mic_recorder
 import speech_recognition as sr
+from io import BytesIO
 
 st.set_page_config(page_title="British IPA Converter", page_icon="🇬🇧", layout="wide")
 
