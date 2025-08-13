@@ -35,9 +35,9 @@ if audio:
     output_wav = "ipa_audio.wav"
     subprocess.run([
         "espeak",
-        "-v", "en-GB+f2",
+        "-v", "en-GB+f4",  # Use a different female voice variant
         "-s", "120",
-        "-p", "65",
+        "-p", "80",        # Higher pitch for more feminine sound
         "-w", output_wav,
         text
     ])
