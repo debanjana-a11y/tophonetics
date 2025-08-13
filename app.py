@@ -22,7 +22,7 @@ if audio:
 
     # Step 2: Recognize speech
     recognizer = sr.Recognizer()
-    with sr.AudioFile(wav_bytes) as source:
+    with sr.AudioFile(wav_buffer) as source:
         audio = recognizer.record(source)
         text = recognizer.recognize_google(audio)
         st.write("**Recognized Text:**", text)
