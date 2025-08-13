@@ -38,7 +38,7 @@ if audio:
         "--ipa",
         "-v", "en-GB-x-rp+f2",
         "-s", "140",
-        -p "50",
+        "-p", "50",
         "-w", output_wav,
         text
     ])
