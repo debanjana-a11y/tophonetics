@@ -3,3 +3,5 @@ phonemizer
 streamlit-mic-recorder
 SpeechRecognition
 pydub
+TTS
+soundfile
