@@ -36,7 +36,7 @@ if audio:
     subprocess.run([
         "espeak",
         "--ipa",
-        "-v", "en-gb",
+        "-v", "en-GB-x-rp",
         "-w", output_wav,
         text
     ])
