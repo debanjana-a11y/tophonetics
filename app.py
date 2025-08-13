@@ -4,7 +4,7 @@ import speech_recognition as sr
 from phonemizer import phonemize
 from pydub import AudioSegment
 from io import BytesIO
-from TTS.api import TTS
+import subprocess
 
 st.title("Speech → IPA → Audio")
 
@@ -31,11 +31,17 @@ if audio:
     ipa = phonemize(text, language="en-gb", backend="espeak", strip=True)
     st.write("**IPA:**", ipa)
 
-    # Step 4: Generate speech from text using Coqui TTS (female voice)
+    # Step 4: Generate speech from IPA
     output_wav = "ipa_audio.wav"
-    tts = TTS(model_name="tts_models/en/ljspeech/tacotron2-DDC", progress_bar=False, gpu=False)
-    tts.tts_to_file(text=text, file_path=output_wav)
+    subprocess.run([
+        "espeak",
+        "-v", "en-GB+f4",  # Use a different female voice variant
+        "-s", "120",
+        "-p", "80",        # Higher pitch for more feminine sound
+        "-w", output_wav,
+        text
+    ])
 
-    # Step 5: Play TTS-generated audio
+    # Step 5: Play IPA-generated audio
     with open(output_wav, "rb") as f:
         st.audio(f.read(), format="audio/wav")
