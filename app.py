@@ -19,18 +19,19 @@ audio = mic_recorder(
 # Recognize speech if audio exists
 sentence = st.text_input("Or type your sentence here:")
 
-if audio is not None:
-    recognizer = sr.Recognizer()
-    with sr.AudioFile(audio) as source:
-        audio_data = recognizer.record(source)
-        try:
-            sentence = recognizer.recognize_google(audio_data)
-            st.write(f"**You said:** {sentence}")
-        except sr.UnknownValueError:
-            st.error("Sorry, I could not understand your speech.")
-        except sr.RequestError:
-            st.error("Speech recognition service unavailable.")
+if audio and "bytes" in audio:
+    audio_bytes = audio["bytes"]
 
+    # Wrap in a file-like object
+    audio_file = BytesIO(audio_bytes)
+
+    recognizer = sr.Recognizer()
+    with sr.AudioFile(audio_file) as source:
+        audio_data = recognizer.record(source)
+        text = recognizer.recognize_google(audio_data)
+        st.write("You said:", text)
+        sentence = text
+    
 # Convert to IPA
 if st.button("Convert to IPA", use_container_width=True):
     if sentence.strip():
