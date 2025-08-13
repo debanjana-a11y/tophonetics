@@ -18,12 +18,18 @@ audio = mic_recorder(
 if audio:
     st.audio(audio["bytes"], format="audio/wav")
 
+    webm_data = BytesIO(audio["bytes"])
+    sound = AudioSegment.from_file(webm_data, format="webm")
+    wav_buffer = BytesIO()
+    sound.export(wav_buffer, format="wav")
+    wav_buffer.seek(0)
+
     # Convert bytes to a file-like object
-    audio_file = BytesIO(audio["bytes"])
+    # audio_file = BytesIO(audio["bytes"])
 
     # Recognize speech
     recognizer = sr.Recognizer()
-    with sr.AudioFile(audio_file) as source:
+    with sr.AudioFile(wav_buffer) as source:
         audio_data = recognizer.record(source)
         try:
             text = recognizer.recognize_google(audio_data)

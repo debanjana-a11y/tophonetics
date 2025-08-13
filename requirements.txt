@@ -2,3 +2,4 @@ streamlit
 phonemizer
 streamlit-mic-recorder
 SpeechRecognition
+pydub
