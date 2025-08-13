@@ -3,4 +3,3 @@ phonemizer
 streamlit-mic-recorder
 SpeechRecognition
 pydub
-google-cloud-texttospeech
