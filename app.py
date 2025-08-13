@@ -37,6 +37,7 @@ if audio:
         "espeak",
         "--ipa",
         "-v", "en-GB-x-rp",
+        "-s", "140", 
         "-w", output_wav,
         text
     ])
