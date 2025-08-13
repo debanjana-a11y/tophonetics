@@ -3,8 +3,8 @@ from streamlit_mic_recorder import mic_recorder
 import speech_recognition as sr
 from phonemizer import phonemize
 from pydub import AudioSegment
+from io import BytesIO
 import subprocess
-import io
 
 st.title("Speech → IPA → Audio")
 
