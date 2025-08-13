@@ -1,5 +1,5 @@
 import streamlit as st
-from streamlite_mic_recorder import mic_recorder
+from streamlit_mic_recorder import mic_recorder
 import speech_recognition as sr
 from phonemizer import phonemize
 from pydub import AudioSegment
