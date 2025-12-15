@@ -2,4 +2,8 @@ streamlit
 phonemizer
 streamlit-mic-recorder
 SpeechRecognition
-pydub
+pydub==0.22.0
+imageio-ffmpeg==0.6.0
+gTTS
+TTS
+soundfile

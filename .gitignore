@@ -1,0 +1,29 @@
+.venv
+# Virtual environments
+venv/
+env/
+ENV/
+
+# Python caches
+__pycache__/
+*.py[cod]
+*.so
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+
+# Pytest cache
+.pytest_cache/
+
+# mypy
+.mypy_cache/
+
+# Streamlit & generated audio
+*.wav
+*.mp3
+
+# IDEs
+.vscode/
+.idea/
