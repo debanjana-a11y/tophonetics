@@ -4,6 +4,6 @@ streamlit-mic-recorder
 SpeechRecognition
 pydub==0.22.0
 imageio-ffmpeg==0.6.0
-gTTS==2.5.4
+gTTS
 TTS
 soundfile
