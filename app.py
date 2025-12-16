@@ -71,44 +71,44 @@ if audio:
             import importlib, os, traceback
 
             # Try Coqui TTS if installed
-            try:
-                if importlib.util.find_spec("TTS") is not None:
-                    st.info("Attempting Coqui TTS (may download model on first run)...")
-                    from TTS.api import TTS
-                    output_wav = "ipa_audio.wav"
-                    try:
-                        with st.spinner("Generating audio with Coqui TTS..."):
-                            tts = TTS(model_name="tts_models/en/ljspeech/tacotron2-DDC", progress_bar=False, gpu=False)
-                            tts.tts_to_file(text=text, file_path=output_wav)
-                        # verify file was created
-                        if not os.path.exists(output_wav):
-                            raise RuntimeError("Coqui TTS finished without producing output file")
-                        tts_done = True
-                        st.success("Generated audio using Coqui TTS")
-                    except Exception as e:
-                        st.error("Coqui TTS generation failed: " + str(e))
-                        st.text(traceback.format_exc())
-                else:
-                    st.info("Coqui TTS not installed; skipping Coqui and trying other backends.")
-            except Exception as e:
-                st.error("Unexpected error while checking Coqui TTS: " + str(e))
-                st.text(traceback.format_exc())
+            # try:
+            #     if importlib.util.find_spec("TTS") is not None:
+            #         st.info("Attempting Coqui TTS (may download model on first run)...")
+            #         from TTS.api import TTS
+            #         output_wav = "ipa_audio.wav"
+            #         try:
+            #             with st.spinner("Generating audio with Coqui TTS..."):
+            #                 tts = TTS(model_name="tts_models/en/ljspeech/tacotron2-DDC", progress_bar=False, gpu=False)
+            #                 tts.tts_to_file(text=text, file_path=output_wav)
+            #             # verify file was created
+            #             if not os.path.exists(output_wav):
+            #                 raise RuntimeError("Coqui TTS finished without producing output file")
+            #             tts_done = True
+            #             st.success("Generated audio using Coqui TTS")
+            #         except Exception as e:
+            #             st.error("Coqui TTS generation failed: " + str(e))
+            #             st.text(traceback.format_exc())
+            #     else:
+            #         st.info("Coqui TTS not installed; skipping Coqui and trying other backends.")
+            # except Exception as e:
+            #     st.error("Unexpected error while checking Coqui TTS: " + str(e))
+            #     st.text(traceback.format_exc())
 
-            if not tts_done:
-                try:
-                    from gtts import gTTS
-                    output_wav = "ipa_audio.mp3"
-                    tts = gTTS(text=text, lang='en')
-                    tts.save(output_wav)
-                    # convert mp3 to wav for consistent playback
-                    if ffmpeg_exe:
-                        proc2 = subprocess.run([ffmpeg_exe, "-i", output_wav, "-f", "wav", "-ar", "16000", "-ac", "1", "ipa_audio.wav"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-                        if proc2.returncode == 0:
-                            output_wav = "ipa_audio.wav"
-                    tts_done = True
-                    st.info("Generated audio using gTTS (Google Text-to-Speech)")
-                except Exception:
-                    pass
+            # if not tts_done:
+            #     try:
+            #         from gtts import gTTS
+            #         output_wav = "ipa_audio.mp3"
+            #         tts = gTTS(text=text, lang='en')
+            #         tts.save(output_wav)
+            #         # convert mp3 to wav for consistent playback
+            #         if ffmpeg_exe:
+            #             proc2 = subprocess.run([ffmpeg_exe, "-i", output_wav, "-f", "wav", "-ar", "16000", "-ac", "1", "ipa_audio.wav"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            #             if proc2.returncode == 0:
+            #                 output_wav = "ipa_audio.wav"
+            #         tts_done = True
+            #         st.info("Generated audio using gTTS (Google Text-to-Speech)")
+            #     except Exception:
+            #         pass
 
             if not tts_done:
                 # Try espeak if installed
